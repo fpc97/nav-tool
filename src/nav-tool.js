@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const navigation = {
+const navLayout = {
     'Who we are': {
         'Go back': 'back',
         'Principles': 'www.google.com',
@@ -36,20 +36,22 @@ const navigation = {
 export default class NavTool extends Component {
     state = {
         prefix: 'ntl',
-        navigationChain: []
+        navigationChain: [],
+
+        levelClasses: true
     }
 
     getList = () => {
         const chain = this.state.navigationChain;
         switch (chain.length) {
             case 0:
-                return navigation;
+                return navLayout;
             case 1:
-                return navigation[chain];
+                return navLayout[chain];
             default:
                 return chain.reduce((a, b) => (
                     typeof a === 'string' ?
-                    navigation[a][b]
+                    navLayout[a][b]
                     : a[b])
                 );
         }
@@ -76,6 +78,8 @@ export default class NavTool extends Component {
         this.setState({navigationChain: newChain});
     }
 
+    composeLevelClass = elementType => `${this.state.prefix}-${elementType}-level-${this.state.navigationChain.length}`;
+
     parseList = list => {
         const arrList = Object.entries(list);
 
@@ -92,7 +96,7 @@ export default class NavTool extends Component {
             }
         });
 
-        return parsedList.map((a, i) => <li key={i}>{a}</li>);
+        return parsedList.map((a, i) => <li key={i} className={this.state.levelClasses ? this.composeLevelClass('li') : ''}>{a}</li>);
     }
 
     generateSection = () => {
@@ -104,7 +108,7 @@ export default class NavTool extends Component {
     render() {
         return (
             <nav>
-                <ul>
+                <ul className={this.state.levelClasses ? this.composeLevelClass('ul') : ''}>
                     {this.generateSection()}
                 </ul>
             </nav>
