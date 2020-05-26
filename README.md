@@ -46,10 +46,10 @@ The tool accepts a small set of parameters as props:
 
 The version with transitions aditionally accepts the following parameters:
 
-* `time`: Number. A duration in milliseconds for both the entering and exiting animations. Defaults to 1000 (1 second).
-* `timeExit`: Number. A duration in milliseconds for the entering animation. Defaults to 1000 (1 second).
-* `timeEnter`: Number. A duration in milliseconds for the exiting animation. Defaults to 1000 (1 second).
-* `matchTransitionDuration`: Boolean. If `true` it'll state an in-line `transitionDuration` CSS property in the base `<nav>` element that matches the script's durations. Defaults to false.
+* **`time`**: Number. A duration in milliseconds for both the entering and exiting animations. Defaults to 1000 (1 second).
+* **`timeExit`**: Number. A duration in milliseconds for the entering animation. Defaults to 1000 (1 second).
+* **`timeEnter`**: Number. A duration in milliseconds for the exiting animation. Defaults to 1000 (1 second).
+* **`matchTransitionDuration`**: Boolean. If `true` it'll state an in-line `transitionDuration` CSS property in the base `<nav>` element that matches the script's durations. Defaults to false.
 
 ## Transitions
 
