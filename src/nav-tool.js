@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 
 export default class NavTool extends Component {
     state = {
-        prefix: 'ntl',
-        navigationChain: [],
+        navigationChain: []
+    }
 
-        levelClasses: true
+    constructor(props) {
+        super(props);
+        
+        const prefix = props.prefix || 'ntl';
+        const levelClasses = props.levelClasses || false;
+
+        this.state = {
+            prefix,
+            levelClasses,
+            navigationChain: []
+        };
     }
 
     getList = () => {
@@ -44,12 +54,13 @@ export default class NavTool extends Component {
                     className={this.state.prefix + (it[1] === 'back' ? '-back' : '-push')}
                 >{it[0]}</span>;
             } else {
-                // Here you'll want to switch to Routes
                 return <a className={this.state.prefix + '-link'} href={it[1]}>{it[0]}</a>;
+                // In case you're using Routes
+                // return <Link to={it[1]}>
             }
         });
 
-        return parsedList.map((a, i) => <li key={i} className={this.state.levelClasses ? this.composeLevelClass('li') : ''}>{a}</li>);
+        return parsedList.map((a, i) => <li key={i} className={this.state.levelClasses ? this.composeLevelClass('li') : null}>{a}</li>);
     }
 
     generateSection = () => {
@@ -61,7 +72,7 @@ export default class NavTool extends Component {
     render() {
         return (
             <nav>
-                <ul className={this.state.levelClasses ? this.composeLevelClass('ul') : ''}>
+                <ul className={this.state.levelClasses ? this.composeLevelClass('ul') : null}>
                     {this.generateSection()}
                 </ul>
             </nav>
