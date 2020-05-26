@@ -44,6 +44,8 @@ export default class NavToolTransitions extends Component {
     }
 
     changeList = e => {
+        if (this.state.currentTransitionState.match(/(exiting|entering)/)) return;
+
         const target = e.target;
 
         this.setState({currentTransitionState: 'exiting'});
@@ -102,7 +104,7 @@ export default class NavToolTransitions extends Component {
 
         return (
             <nav className={this.state.prefix}>
-                <ul className={ulClass} style={{transitionDuration: this.state.matchTransitionDuration ? this.getTransitionTime() : ''}}>
+                <ul className={ulClass}>
                     {this.generateSection()}
                 </ul>
             </nav>

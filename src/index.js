@@ -9,45 +9,45 @@ import NavToolTransitions from './nav-tool-transitions';
 const navLayout = {
     'Who we are': {
         'Go back': 'back',
-        'Principles': 'www.google.com',
-        'How we work': 'www.google.com',
-        'History': 'www.google.com'
+        'Principles': '/principles',
+        'How we work': '/how-we-work',
+        'History': '/history'
     },
     'What we do': {
         'Go back': 'back',
-        'News & stories': 'www.google.com',
-        'Countries': 'www.google.com'
+        'News & stories': '/news',
+        'Countries': '/countries'
     },
     'Careers': {
         'Go back': 'back',
         'Work in the US office': {
             'Go back': 'back',
-            'Current job listings': 'www.google.com',
-            'Office internships': 'www.google.com'
+            'Current job listings': '/job-listings',
+            'Office internships': '/internships'
         },
         'Work in the field': {
             'Go back': 'back',
-            'Essential requirements': 'www.google.com',
-            'Find a role': 'www.google.com'
+            'Essential requirements': '/requirements',
+            'Find a role': '/find-a-role'
         }
     },
     'Support us': {
         'Go back': 'back',
-        'Donate online': 'www.google.com',
-        'Mail in donations': 'www.google.com'
+        'Donate online': '/donate?t=online',
+        'Mail in donations': '/donate?t=mail'
     },
-    'Donate': 'http://www.google.com'
+    'Donate': '/donate'
 };
 
 const Index = () => {
   	return (
-		<div>
+		<div className="wrapper">
 			<section className="navtool-section navtool-section--regular">
-				<h1>Nav tool</h1>
+				<h2>Normal</h2>
 				<NavTool navTree={navLayout} levelClasses/>
 			</section>
 			<section className="navtool-section navtool-section--transitions">
-				<h1>Nav tool with transitions</h1>
+				<h2>With transitions</h2>
 				<NavToolTransitions navTree={navLayout}/>
 			</section>
 		</div>

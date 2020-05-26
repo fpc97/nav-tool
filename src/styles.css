@@ -1,34 +1,90 @@
 *{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+.wrapper{
+    display: inline-block;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
 .navtool-section{
-    margin-bottom: 20px;
+    display: inline-block;
     font-family: arial;
+    width: 500px;
+    vertical-align: top;
+}
+
+.navtool-section--transitions{
+    margin-left: 200px;
+}
+
+h2{
+    font-size: 40px;
+    border-bottom: 3px solid black;
+    padding-bottom: 6px;
 }
 
 .ntl a,
 .ntl a:link,
 .ntl a:visited,
-.ntl span{
-    color: rgb(73, 80, 175);
+.ntl-push{
+    color: black;
     text-decoration: none;
+}
+
+.ntl-back{
+    color: rgb(99, 99, 99);
+}
+
+.ntl{
+    margin-top: 30px;
 }
 
 .ntl li{
     list-style: none;
-    margin-bottom: 10px;
+    font-family: verdana, sans-serif;
+    font-size: 36px;
+}
+
+.ntl li > span,
+.ntl li > a{
+    display: inline-block;
+    width: 100%;
+    padding: 8px 0 8px 22px;
+}
+
+.ntl li > span:hover,
+.ntl li > a:hover{
+    background-color: #2B80FF;
+    color: white;
 }
 
 .ntl-transition-entering{
     transition-property: opacity;
     transition-duration: 1s;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: ease-out;
     opacity: 1;
 }
 .ntl-transition-exiting{
     transition-property: opacity;
     transition-duration: 1s;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: ease-out;
     opacity: 0;
+}
+
+.ntl-push::after{
+    content: '>';
+    float: right;
+    margin-right: 20px;
+}
+.ntl-back::after{
+    content: '<';
+    float: right;
+    margin-right: 20px;
 }
