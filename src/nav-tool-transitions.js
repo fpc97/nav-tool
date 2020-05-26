@@ -2,10 +2,29 @@ import React, { Component } from 'react';
 
 export default class NavToolTransitions extends Component {
     state = {
-        prefix: 'ntl',
-        navigationChain: [],
+        navigationChain: []
+    }
 
-        levelClasses: true
+    constructor(props) {
+        super(props);
+        
+        const prefix = props.prefix || 'ntl';
+        const levelClasses = props.levelClasses || false;
+
+        const matchTransitionDuration   = props.matchTransitionDuration     || false;
+        const transitionTimeExiting     = props.timeExit    || props.time   || 1000;
+        const transitionTimeEntering    = props.timeEnter   || props.time   || 1000;
+
+        this.state = {
+            prefix,
+            levelClasses,
+            navigationChain: [],
+
+            transitionTimeEntering,
+            transitionTimeExiting,
+            matchTransitionDuration,
+            currentTransitionState: 'entered'
+        };
     }
 
     getList = () => {
@@ -25,13 +44,30 @@ export default class NavToolTransitions extends Component {
     }
 
     changeList = e => {
-        const newChain = this.state.navigationChain;
-        const pop = e.target.classList.contains((this.state.prefix + '-back'));
-        newChain[pop ? 'pop' : 'push'](e.target.textContent);
-        this.setState({navigationChain: newChain});
+        const target = e.target;
+
+        this.setState({currentTransitionState: 'exiting'});
+
+        setTimeout(() => {
+            const newChain = this.state.navigationChain;
+            const pop = target.classList.contains((this.state.prefix + '-back'));
+            newChain[pop ? 'pop' : 'push'](target.textContent);
+            this.setState({navigationChain: newChain, currentTransitionState: 'entering'});
+
+            setTimeout(() => this.setState({currentTransitionState: 'entered'}), this.state.transitionTimeEntering);
+
+        }, this.state.transitionTimeExiting);
     }
 
     composeLevelClass = elementType => `${this.state.prefix}-${elementType}-level-${this.state.navigationChain.length}`;
+
+    composeTransitionClass = elementType => `${this.state.prefix}-transition-${this.state.currentTransitionState}`;
+
+    getTransitionTime = () => {
+        const action = this.state.currentTransitionState === 'entering' ? 'transitionTimeEntering' : 'transitionTimeExiting';
+        const timing = this.state[action];
+        return `${timing/1000}s`;
+    };
 
     parseList = list => {
         const arrList = Object.entries(list);
@@ -44,12 +80,15 @@ export default class NavToolTransitions extends Component {
                     className={this.state.prefix + (it[1] === 'back' ? '-back' : '-push')}
                 >{it[0]}</span>;
             } else {
-                // Here you'll want to switch to Routes
                 return <a className={this.state.prefix + '-link'} href={it[1]}>{it[0]}</a>;
+                // In case you're using Routes
+                // return <Link to={it[1]}>
             }
         });
 
-        return parsedList.map((a, i) => <li key={i} className={this.state.levelClasses ? this.composeLevelClass('li') : ''}>{a}</li>);
+        const liClass = `${this.state.levelClasses ? (this.composeLevelClass('li') + ' ') : ''}${this.composeTransitionClass('li')}`
+
+        return parsedList.map((a, i) => <li style={{transitionDuration: this.state.matchTransitionDuration ? this.getTransitionTime() : ''}} key={i} className={liClass}>{a}</li>);
     }
 
     generateSection = () => {
@@ -59,9 +98,11 @@ export default class NavToolTransitions extends Component {
     }
 
     render() {
+        const ulClass = `${this.state.levelClasses ? (this.composeLevelClass('ul') + ' ') : ''}${this.composeTransitionClass('ul')}`;
+
         return (
             <nav>
-                <ul className={this.state.levelClasses ? this.composeLevelClass('ul') : ''}>
+                <ul className={ulClass} style={{transitionDuration: this.state.matchTransitionDuration ? this.getTransitionTime() : ''}}>
                     {this.generateSection()}
                 </ul>
             </nav>
