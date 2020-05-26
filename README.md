@@ -25,7 +25,7 @@ const menu = {
 }
 ```
 
-Each key-value pair represents a route. The key is the exact text to be displayed on-screen. The value can be one of the following:
+Each key-value pair represents a route. The key is a string with the exact text to be displayed on-screen. The value can be one of the following:
 * A string with a route: creates an `<a>` tag with a 'href' attribute containing the route.
 * An object with a new section: creates a `<span>` tag with a onClick event listener that'll switch to containing menu.
 * A string 'back': creates a `<span>` tag with a onClick event listener that'll switch to the previous menu.
