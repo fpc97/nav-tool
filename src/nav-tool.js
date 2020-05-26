@@ -1,38 +1,5 @@
 import React, { Component } from 'react';
 
-const navLayout = {
-    'Who we are': {
-        'Go back': 'back',
-        'Principles': 'www.google.com',
-        'How we work': 'www.google.com',
-        'History': 'www.google.com'
-    },
-    'What we do': {
-        'Go back': 'back',
-        'News & stories': 'www.google.com',
-        'Countries': 'www.google.com'
-    },
-    'Careers': {
-        'Go back': 'back',
-        'Work in the US office': {
-            'Go back': 'back',
-            'Current job listings': 'www.google.com',
-            'Office internships': 'www.google.com'
-        },
-        'Work in the field': {
-            'Go back': 'back',
-            'Essential requirements': 'www.google.com',
-            'Find a role': 'www.google.com'
-        }
-    },
-    'Support us': {
-        'Go back': 'back',
-        'Donate online': 'www.google.com',
-        'Mail in donations': 'www.google.com'
-    },
-    'Donate': 'http://www.google.com'
-};
-
 export default class NavTool extends Component {
     state = {
         prefix: 'ntl',
@@ -45,30 +12,16 @@ export default class NavTool extends Component {
         const chain = this.state.navigationChain;
         switch (chain.length) {
             case 0:
-                return navLayout;
+                return this.props.navTree;
             case 1:
-                return navLayout[chain];
+                return this.props.navTree[chain];
             default:
                 return chain.reduce((a, b) => (
                     typeof a === 'string' ?
-                    navLayout[a][b]
+                    this.props.navTree[a][b]
                     : a[b])
                 );
         }
-    }
-
-    popList = () => {
-        const newChain = this.state.navigationChain;
-        newChain.pop();
-        this.setState({
-            navigationChain: newChain
-        });
-    }
-
-    pushList = e => {
-        this.setState({
-            navigationChain: this.state.navigationChain.push(e.target.value)
-        });
     }
 
     changeList = e => {
