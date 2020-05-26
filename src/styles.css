@@ -1,0 +1,34 @@
+*{
+    box-sizing: border-box;
+}
+
+.navtool-section{
+    margin-bottom: 20px;
+    font-family: arial;
+}
+
+.ntl a,
+.ntl a:link,
+.ntl a:visited,
+.ntl span{
+    color: rgb(73, 80, 175);
+    text-decoration: none;
+}
+
+.ntl li{
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.ntl-transition-entering{
+    transition-property: opacity;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    opacity: 1;
+}
+.ntl-transition-exiting{
+    transition-property: opacity;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    opacity: 0;
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './styles.css';
+
 import NavTool from './nav-tool';
 import NavToolTransitions from './nav-tool-transitions';
 
@@ -40,12 +42,16 @@ const navLayout = {
 const Index = () => {
   	return (
 		<div>
-			<h1>Nav tool</h1>
-			<NavTool navTree={navLayout} prefix={'cacona'} levelClasses/>
-			<h1>Nav tool with transitions</h1>
-			<NavToolTransitions navTree={navLayout}/>
+			<section className="navtool-section navtool-section--regular">
+				<h1>Nav tool</h1>
+				<NavTool navTree={navLayout} levelClasses/>
+			</section>
+			<section className="navtool-section navtool-section--transitions">
+				<h1>Nav tool with transitions</h1>
+				<NavToolTransitions navTree={navLayout}/>
+			</section>
 		</div>
-	)
+	);
 };
 
 ReactDOM.render(<Index/>, document.getElementById('root'));

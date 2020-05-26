@@ -71,7 +71,7 @@ export default class NavTool extends Component {
 
     render() {
         return (
-            <nav>
+            <nav className={this.state.prefix}>
                 <ul className={this.state.levelClasses ? this.composeLevelClass('ul') : null}>
                     {this.generateSection()}
                 </ul>

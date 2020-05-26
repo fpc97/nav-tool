@@ -101,7 +101,7 @@ export default class NavToolTransitions extends Component {
         const ulClass = `${this.state.levelClasses ? (this.composeLevelClass('ul') + ' ') : ''}${this.composeTransitionClass('ul')}`;
 
         return (
-            <nav>
+            <nav className={this.state.prefix}>
                 <ul className={ulClass} style={{transitionDuration: this.state.matchTransitionDuration ? this.getTransitionTime() : ''}}>
                     {this.generateSection()}
                 </ul>
