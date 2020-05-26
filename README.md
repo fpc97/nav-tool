@@ -20,7 +20,7 @@ const menu = {
         'Menu': 'back',
         'Office jobs': '/jobs#office',
         'Jobs in the field': '/jobs#field'
-    }
+    },
     'Contact us!': '/contact'
 }
 ```
